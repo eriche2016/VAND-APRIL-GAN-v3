@@ -134,6 +134,10 @@ def train(args):
             optimizer.step()
             loss_list.append(loss.item())
 
+            # 
+            if idx % 10 == 0:
+                logger.info(f"iters {idx}/{epoch}-th epoch {loss.item()}")
+
         # logs
         if (epoch + 1) % args.print_freq == 0:
             logger.info('epoch [{}/{}], loss:{:.4f}'.format(epoch + 1, epochs, np.mean(loss_list)))
