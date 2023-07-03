@@ -10,8 +10,9 @@ class MVTecSolver(object):
     ]
 
     def __init__(self, root='data/mvtec'):
+        
         self.root = root
-        self.meta_path = f'{root}/meta.json'
+        self.meta_path = f'data/meta_mvtec.json'
 
     def run(self):
         info = dict(train={}, test={})
@@ -40,5 +41,6 @@ class MVTecSolver(object):
             f.write(json.dumps(info, indent=4) + "\n")
 
 if __name__ == '__main__':
+    import pdb; pdb.set_trace()
     runner = MVTecSolver(root='data/mvtec')
     runner.run()

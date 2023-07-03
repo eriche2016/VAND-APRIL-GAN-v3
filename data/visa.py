@@ -12,7 +12,7 @@ class VisASolver(object):
 
     def __init__(self, root='data/visa'):
         self.root = root
-        self.meta_path = f'{root}/meta.json'
+        self.meta_path = f'data/meta_visa.json'
         self.phases = ['train', 'test']
         self.csv_data = pd.read_csv(f'{root}/split_csv/1cls.csv', header=0)
 

@@ -1,0 +1,14 @@
+23-07-03 17:18:44.906 - INFO: train_data_path: ./data/mvtec
+23-07-03 17:18:44.906 - INFO: save_path: ./exps/visa/vit_large_14_518
+23-07-03 17:18:44.906 - INFO: config_path: ./open_clip/model_configs/ViT-L-14-336.json
+23-07-03 17:18:44.906 - INFO: dataset: mvtec
+23-07-03 17:18:44.906 - INFO: model: ViT-L-14-336
+23-07-03 17:18:44.906 - INFO: pretrained: openai
+23-07-03 17:18:44.906 - INFO: features_list: [6, 12, 18, 24]
+23-07-03 17:18:44.906 - INFO: epoch: 3
+23-07-03 17:18:44.906 - INFO: learning_rate: 0.001
+23-07-03 17:18:44.906 - INFO: batch_size: 2
+23-07-03 17:18:44.906 - INFO: image_size: 518
+23-07-03 17:18:44.906 - INFO: aug_rate: 0.2
+23-07-03 17:18:44.906 - INFO: print_freq: 1
+23-07-03 17:18:44.906 - INFO: save_freq: 1

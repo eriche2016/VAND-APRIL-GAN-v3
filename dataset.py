@@ -14,7 +14,7 @@ class VisaDataset(data.Dataset):
 		self.target_transform = target_transform
 
 		self.data_all = []
-		meta_info = json.load(open(f'{self.root}/meta.json', 'r'))
+		meta_info = json.load(open(f'{os.path.dirname(self.root)}/meta_visa.json', 'r'))
 		name = self.root.split('/')[-1]
 		meta_info = meta_info[mode]
 
@@ -68,7 +68,7 @@ class MVTecDataset(data.Dataset):
 		self.aug_rate = aug_rate
 
 		self.data_all = []
-		meta_info = json.load(open(f'{self.root}/meta.json', 'r'))
+		meta_info = json.load(open(f'{os.path.dirname(self.root)}/meta_mvtec.json', 'r'))
 		name = self.root.split('/')[-1]
 		meta_info = meta_info[mode]
 

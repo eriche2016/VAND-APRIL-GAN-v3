@@ -111,7 +111,7 @@ def train(args):
                 patch_tokens = trainable_layer(patch_tokens)
                 anomaly_maps = []
                 for layer in range(len(patch_tokens)):
-                    patch_tokens[layer] /= patch_tokens[layer].norm(dim=-1, keepdim=True)
+                    patch_tokens[layer] = patch_tokens[layer]/patch_tokens[layer].norm(dim=-1, keepdim=True)
                     anomaly_map = (100.0 * patch_tokens[layer] @ text_features)
                     B, L, C = anomaly_map.shape
                     H = int(np.sqrt(L))
