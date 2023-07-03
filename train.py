@@ -76,7 +76,7 @@ def train(args):
         transforms.CenterCrop(image_size),
         transforms.ToTensor()
     ])
-    
+
     # datasets
     if args.dataset == 'mvtec':
         train_data = MVTecDataset(root=args.train_data_path, transform=preprocess, target_transform=transform,
@@ -133,7 +133,8 @@ def train(args):
             loss.backward()
             optimizer.step()
             loss_list.append(loss.item())
-
+            if idx % 10 == 0:
+                loffer.info(f"iter {idx} \t loss {loss.item()}")
         # logs
         if (epoch + 1) % args.print_freq == 0:
             logger.info('epoch [{}/{}], loss:{:.4f}'.format(epoch + 1, epochs, np.mean(loss_list)))
