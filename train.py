@@ -38,6 +38,7 @@ def train(args):
     save_path = args.save_path
     if not os.path.exists(save_path):
         os.makedirs(save_path)
+    import pdb; pdb.set_trace()
     txt_path = os.path.join(save_path, 'log.txt')  # log
 
     # model configs
@@ -133,8 +134,8 @@ def train(args):
             loss.backward()
             optimizer.step()
             loss_list.append(loss.item())
-            if idx % 10 == 0:
-                loffer.info(f"iter {idx} \t loss {loss.item()}")
+            if idx % 1 == 0:
+                logger.info(f"iter {idx} \t loss {loss.item()}")
         # logs
         if (epoch + 1) % args.print_freq == 0:
             logger.info('epoch [{}/{}], loss:{:.4f}'.format(epoch + 1, epochs, np.mean(loss_list)))
