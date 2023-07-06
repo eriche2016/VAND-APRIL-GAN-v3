@@ -9,8 +9,10 @@ fi
 # MVTec
 ############################################################
 # ### train on the MVTec AD dataset (and perform zero-shot test on visa) 
+
+# vit_large_14_518
 if [ 1 -eq 1 ]; then
-    CUDA_VISIBLE_DEVICES=3 python train.py --dataset mvtec --train_data_path ./data/mvtec \
+    CUDA_VISIBLE_DEVICES=0 python train.py --dataset mvtec --train_data_path ./data/mvtec \
     --save_path ./exps/visa/vit_large_14_518 --config_path ./open_clip/model_configs/ViT-L-14-336.json --model ViT-L-14-336 \
     --features_list 6 12 18 24 --pretrained openai --image_size 518  --batch_size 8 --aug_rate 0.2 --print_freq 1 \
     --epoch 3 --save_freq 1
@@ -23,6 +25,14 @@ if [ 1 -eq 0 ]; then
     --features_list 6 12 18 24 --pretrained openai --image_size 518  --batch_size 8 --print_freq 1 \
     --epoch 15 --save_freq 1
 fi
+
+# use ResNet50  
+if [ 1 -eq 0 ]; then 
+    python train.py --dataset mvtec --train_data_path ./data/mvtec \ 
+    --save_path ./exps/visa/RN50x16 --config_path ./open_clip/model_configs/RN50x16.json --model RN50x16 \ 
+    --features_list 1 2 3 --pretrained openai --image_size 384  --batch_size 8 --aug_rate 0.2 --print_freq 1 \ 
+    --epoch 5 --save_freq 1 --learning_rate 0.0001
+fi 
 
 ###############################
 # few shot experiments 
