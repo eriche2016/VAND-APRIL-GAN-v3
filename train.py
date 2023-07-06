@@ -38,6 +38,7 @@ def train(args):
     save_path = args.save_path
     if not os.path.exists(save_path):
         os.makedirs(save_path)
+    import pdb; pdb.set_trace()
     txt_path = os.path.join(save_path, 'log.txt')  # log
 
     # model configs
@@ -76,7 +77,7 @@ def train(args):
         transforms.CenterCrop(image_size),
         transforms.ToTensor()
     ])
-    
+
     # datasets
     if args.dataset == 'mvtec':
         train_data = MVTecDataset(root=args.train_data_path, transform=preprocess, target_transform=transform,
@@ -140,9 +141,14 @@ def train(args):
             loss.backward()
             optimizer.step()
             loss_list.append(loss.item())
+<<<<<<< HEAD
 
         if idx % 1 == 0:
             logger.info(f"iter {idx} \t loss {loss.item()}")
+=======
+            if idx % 1 == 0:
+                logger.info(f"iter {idx} \t loss {loss.item()}")
+>>>>>>> 9d01ec7ff2e7f0108e092f0699c8cd7cd7e2c671
         # logs
         if (epoch + 1) % args.print_freq == 0:
             logger.info('epoch [{}/{}], loss:{:.4f}'.format(epoch + 1, epochs, np.mean(loss_list)))
