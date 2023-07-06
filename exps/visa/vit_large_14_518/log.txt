@@ -1,14 +1,14 @@
-23-07-06 10:26:23.500 - INFO: train_data_path: ./data/mvtec
-23-07-06 10:26:23.500 - INFO: save_path: ./exps/visa/vit_large_14_518
-23-07-06 10:26:23.500 - INFO: config_path: ./open_clip/model_configs/ViT-L-14-336.json
-23-07-06 10:26:23.500 - INFO: dataset: mvtec
-23-07-06 10:26:23.500 - INFO: model: ViT-L-14-336
-23-07-06 10:26:23.500 - INFO: pretrained: openai
-23-07-06 10:26:23.500 - INFO: features_list: [6, 12, 18, 24]
-23-07-06 10:26:23.500 - INFO: epoch: 3
-23-07-06 10:26:23.500 - INFO: learning_rate: 0.001
-23-07-06 10:26:23.500 - INFO: batch_size: 8
-23-07-06 10:26:23.500 - INFO: image_size: 518
-23-07-06 10:26:23.501 - INFO: aug_rate: 0.2
-23-07-06 10:26:23.501 - INFO: print_freq: 1
-23-07-06 10:26:23.501 - INFO: save_freq: 1
+23-07-06 11:36:35.861 - INFO: train_data_path: ./data/mvtec
+23-07-06 11:36:35.861 - INFO: save_path: ./exps/visa/vit_large_14_518
+23-07-06 11:36:35.861 - INFO: config_path: ./open_clip/model_configs/ViT-L-14-336.json
+23-07-06 11:36:35.861 - INFO: dataset: mvtec
+23-07-06 11:36:35.861 - INFO: model: ViT-L-14-336
+23-07-06 11:36:35.861 - INFO: pretrained: openai
+23-07-06 11:36:35.861 - INFO: features_list: [6, 12, 18, 24]
+23-07-06 11:36:35.861 - INFO: epoch: 3
+23-07-06 11:36:35.861 - INFO: learning_rate: 0.001
+23-07-06 11:36:35.861 - INFO: batch_size: 8
+23-07-06 11:36:35.861 - INFO: image_size: 518
+23-07-06 11:36:35.861 - INFO: aug_rate: 0.2
+23-07-06 11:36:35.861 - INFO: print_freq: 1
+23-07-06 11:36:35.861 - INFO: save_freq: 1

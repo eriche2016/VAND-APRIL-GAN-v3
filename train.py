@@ -98,9 +98,19 @@ def train(args):
 
     # text prompt
     with torch.cuda.amp.autocast(), torch.no_grad():
-        obj_list = train_data.get_cls_names()
-        text_prompts = encode_text_with_prompt_ensemble(model, obj_list, tokenizer, device)
-
+        # we should save the text prompt embeddings for fast loading 
+        if not os.path.exists(os.path.join(save_path, "text_prompt.pth")):
+            obj_list = train_data.get_cls_names()
+            text_prompts = encode_text_with_prompt_ensemble(model, obj_list, tokenizer, device)
+            # now let us save it 
+            torch.save(text_prompts, os.path.join(save_path, "text_prompt.pth"))
+        else: 
+            # 768 x 2 (normal vs. abnormal embeddings)
+            # i.e., text_prompts[:, 0]: normal embeddings
+            #       text_prompts[:, 1]: abnormal embeddings
+            text_prompts = torch.load(os.path.join(save_path, "text_prompt.pth"))
+    
+    import pdb; pdb.set_trace()
     for epoch in range(epochs):
         loss_list = []
         idx = 0
