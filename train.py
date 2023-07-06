@@ -95,6 +95,11 @@ def train(args):
     loss_focal = FocalLoss()
     loss_dice = BinaryDiceLoss()
 
+    # text prompt
+    with torch.cuda.amp.autocast(), torch.no_grad():
+        obj_list = train_data.get_cls_names()
+        text_prompts = encode_text_with_prompt_ensemble(model, obj_list, tokenizer, device)
+
     for epoch in range(epochs):
         loss_list = []
         idx = 0
@@ -105,13 +110,16 @@ def train(args):
             with torch.cuda.amp.autocast():
                 with torch.no_grad():
                     image_features, patch_tokens = model.encode_image(image, features_list)
-                    text_features = encode_text_with_prompt_ensemble(model, cls_name, tokenizer, device)
+                    text_features = []
+                    for cls in cls_name:
+                        text_features.append(text_prompts[cls])
+                    text_features = torch.stack(text_features, dim=0)
 
                 # pixel level
                 patch_tokens = trainable_layer(patch_tokens)
                 anomaly_maps = []
                 for layer in range(len(patch_tokens)):
-                    patch_tokens[layer] = patch_tokens[layer]/patch_tokens[layer].norm(dim=-1, keepdim=True)
+                    patch_tokens[layer] /= patch_tokens[layer].norm(dim=-1, keepdim=True)
                     anomaly_map = (100.0 * patch_tokens[layer] @ text_features)
                     B, L, C = anomaly_map.shape
                     H = int(np.sqrt(L))
@@ -122,8 +130,7 @@ def train(args):
 
             # losses
             gt = items['img_mask'].squeeze().to(device)
-            gt[gt > 0.5] = 1
-            gt[gt <= 0.5] = 0
+            gt[gt > 0.5], gt[gt <= 0.5] = 1, 0
             loss = 0
             for num in range(len(anomaly_maps)):
                 loss += loss_focal(anomaly_maps[num], gt)
@@ -134,10 +141,8 @@ def train(args):
             optimizer.step()
             loss_list.append(loss.item())
 
-            # 
-            if idx % 10 == 0:
-                logger.info(f"iters {idx}/{epoch}-th epoch {loss.item()}")
-
+        if idx % 1 == 0:
+            logger.info(f"iter {idx} \t loss {loss.item()}")
         # logs
         if (epoch + 1) % args.print_freq == 0:
             logger.info('epoch [{}/{}], loss:{:.4f}'.format(epoch + 1, epochs, np.mean(loss_list)))
@@ -171,4 +176,3 @@ if __name__ == '__main__':
 
     setup_seed(111)
     train(args)
-
