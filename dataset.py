@@ -9,6 +9,10 @@ import os
 
 class VisaDataset(data.Dataset):
 	def __init__(self, root, transform, target_transform, mode='test', k_shot=0, save_dir=None, obj_name=None):
+		"""NOTE
+			by default, we will use "test" for training, which means only test data of visa dataset
+			are used to train the learnable linear layer 
+		"""
 		self.root = root
 		self.transform = transform
 		self.target_transform = target_transform
@@ -62,6 +66,8 @@ class VisaDataset(data.Dataset):
 
 class MVTecDataset(data.Dataset):
 	def __init__(self, root, transform, target_transform, aug_rate, mode='test', k_shot=0, save_dir=None, obj_name=None):
+		"""by default, mode is "test", which means we will use test data from mvtec for training
+		"""
 		self.root = root
 		self.transform = transform
 		self.target_transform = target_transform

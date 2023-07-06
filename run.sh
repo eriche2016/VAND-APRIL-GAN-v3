@@ -27,7 +27,7 @@ fi
 ###############################
 # few shot experiments 
 ################################
-if [ 1 -eq 1 ]; then 
+if [ 1 -eq 0 ]; then 
     ### test on the VisA dataset
     python test.py --mode few_shot --dataset visa \
     --data_path ./data/visa --save_path ./results/visa/few_shot/4shot/seed42 \
